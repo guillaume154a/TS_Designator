@@ -121,26 +121,46 @@ public class DesignatorBaseModel extends IVCT_BaseModel {
 			items.put(TestItemIds.InternalError                                    , new TestItem(true , true , new TC[]{TC.TC_Life, TC.TC_DR}, TestItemType.Inconclusive, "internal error"));
 			items.put(TestItemIds.DetectedAtLeastOneDesignatorCreation             , new TestItem(false, false, new TC[]{TC.TC_Life, TC.TC_DR}, TestItemType.Inconclusive, "a Designator shall be created"));
 			items.put(TestItemIds.Decoding                                         , new TestItem(false, true , new TC[]{TC.TC_Life, TC.TC_DR}, TestItemType.Fail        , "decoding Designator attribute(s) failed"));
+			// IR-DS-0001
 			items.put(TestItemIds.MandatoryAttributesHaveBeenSet                   , new TestItem(false, true , new TC[]{TC.TC_Life          }, TestItemType.Fail        , "all mandatory Designator attributes shall have a value in the initial attribute value update"));
+			// IR-DS-0001
 			items.put(TestItemIds.MandatoryWarningOnlyAttributesHaveBeenSet        , new TestItem(false, true , new TC[]{TC.TC_Life          }, TestItemType.Warning     , "all mandatory (warning only) Designator attributes shall have a value in the initial attribute value update"));
+			// IR-DS-0006
 			items.put(TestItemIds.MultipleSettingOfStaticAttribute                 , new TestItem(false, true , new TC[]{TC.TC_Life          }, TestItemType.Fail        , "static attributes shall be provided only once (unless requested via a Provide Attribute Value Update)"));
+			// IR-DS-0003
 			items.put(TestItemIds.HostEntityIdRefersToExistingEntity               , new TestItem(false, true , new TC[]{TC.TC_Life          }, TestItemType.Fail        , "host entity identifier in Designator shall refer to an existing entity"));
+			// IR-DS-0002
 			items.put(TestItemIds.HostObjectNameRefersToExistingEntity             , new TestItem(false, true , new TC[]{TC.TC_Life          }, TestItemType.Fail        , "host object name in Designator shall refer to an existing entity"));
+			// IR-DS-0004
 			items.put(TestItemIds.HostEntityIdAndHostObjectNameReferToSameEntity   , new TestItem(false, true , new TC[]{TC.TC_Life          }, TestItemType.Fail        , "host entity identifier and host object name in Designator shall refer to same entity"));
+			// IR-DS-0005
 			items.put(TestItemIds.DesignatedObjectIdIsEmptyOrRefersToExistingEntity, new TestItem(false, true , new TC[]{TC.TC_Life          }, TestItemType.Fail        , "designated object id shall be empty OR shall reference an existing entity"));
+			// IR-DS-0007
 			items.put(TestItemIds.OutputPowerIsNonNegative                         , new TestItem(false, true , new TC[]{TC.TC_Life          }, TestItemType.Fail        , "Designator output power shall not be negative"));
+			// IR-DS-0008
 			items.put(TestItemIds.EmissionWavelengthIsNonNegative                  , new TestItem(false, true , new TC[]{TC.TC_Life          }, TestItemType.Fail        , "Designator emission wavelength shall not be negative"));
+			// IR-DS-0010
 			items.put(TestItemIds.RelSpotLocNotSetOrZeroIfNoDesignatedObject       , new TestItem(false, true , new TC[]{TC.TC_Life          }, TestItemType.Fail        , "when no designated object is provided, RelativeSpotLocation shall be set to zero (or not be set at all)"));
+			// IR-DS-0012
 			items.put(TestItemIds.NoAttributeUpdatesWhilePowerZero                 , new TestItem(false, true , new TC[]{TC.TC_Life          }, TestItemType.Fail        , "Designator attributes shall not be updated while output power is zero"));
 			items.put(TestItemIds.DetectedAtLeastOneDesignatorRemoval              , new TestItem(false, false, new TC[]{TC.TC_Life          }, TestItemType.Inconclusive, "a Designator shall be removed"));
+			// IR-DS-0014
 			items.put(TestItemIds.PowerZeroBeforeRemoval                           , new TestItem(false, true , new TC[]{TC.TC_Life          }, TestItemType.Fail        , "output power shall be zero before removal of Designator"));
+			// IR-DS-0014
 			items.put(TestItemIds.DoNotStayLongInPowerZeroStateWarningOnly         , new TestItem(false, true , new TC[]{TC.TC_Life          }, TestItemType.Warning     , "Designator shall not stay in output power zero state for a long time"));
+			// IR-DS-0014
 			items.put(TestItemIds.RemovedQuicklyAfterPowerZeroWarningOnly          , new TestItem(false, true , new TC[]{TC.TC_Life          }, TestItemType.Warning     , "after setting output power to zero, Designator shall be removed quickly"));
+			// IR-DS-0014
 			items.put(TestItemIds.DesignatorRemovedBeforeHostRemoved               , new TestItem(false, true , new TC[]{TC.TC_Life          }, TestItemType.Fail        , "Designator shall be removed before/when host entity is removed"));
+			// IR-DS-0018
 			items.put(TestItemIds.DrStaticAccelerationNotSetOrZero                 , new TestItem(false, true , new TC[]{            TC.TC_DR}, TestItemType.Fail        , "when DR algorithm is set to static, SpotLinearAccelerationVector shall be set to zero (or not be set at all)"));
+			// IR-DS-0019
 			items.put(TestItemIds.DrNonStaticAccelerationSet                       , new TestItem(false, true , new TC[]{            TC.TC_DR}, TestItemType.Fail        , "when DR algorithm is set to non static, SpotLinearAccelerationVector shall be set"));
+			// Test Suite assumption
 			items.put(TestItemIds.DrAlgoStaticOrFvw                                , new TestItem(false, true , new TC[]{            TC.TC_DR}, TestItemType.Fail        , "DR algorithm shall be Static or FVW"));
+			// IR-DS-0017
 			items.put(TestItemIds.DrUpdateOnHeartbeat                              , new TestItem(false, true , new TC[]{            TC.TC_DR}, TestItemType.Fail        , "a spot location update shall be provided at least every <heartbeat> seconds (<heartbeat> defined in TC parameters)"));
+			// IR-DS-0016
 			items.put(TestItemIds.DrPositionExtrapolation                          , new TestItem(false, true , new TC[]{            TC.TC_DR}, TestItemType.Fail        , "a spot location update shall be provided when the discrepancy between the actual position (as determined by its own internal model) and its dead reckoned position (as determined by using specified dead reckoning algorithm) exceeds a predetermined threshold (defined in TC parameters)"));
 		}
 
