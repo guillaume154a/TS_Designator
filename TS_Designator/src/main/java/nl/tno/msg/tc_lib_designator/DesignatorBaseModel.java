@@ -139,22 +139,23 @@ public class DesignatorBaseModel extends IVCT_BaseModel {
 			items.put(TestItemIds.OutputPowerIsNonNegative                         , new TestItem(false, true , new TC[]{TC.TC_Life          }, TestItemType.Fail        , "Designator output power shall not be negative"));
 			// IR-DS-0008
 			items.put(TestItemIds.EmissionWavelengthIsNonNegative                  , new TestItem(false, true , new TC[]{TC.TC_Life          }, TestItemType.Fail        , "Designator emission wavelength shall not be negative"));
-			// IR-DS-0010
+			// IR-SD-0009, IR-DS-0010
 			items.put(TestItemIds.RelSpotLocNotSetOrZeroIfNoDesignatedObject       , new TestItem(false, true , new TC[]{TC.TC_Life          }, TestItemType.Fail        , "when no designated object is provided, RelativeSpotLocation shall be set to zero (or not be set at all)"));
 			// IR-DS-0012
 			items.put(TestItemIds.NoAttributeUpdatesWhilePowerZero                 , new TestItem(false, true , new TC[]{TC.TC_Life          }, TestItemType.Fail        , "Designator attributes shall not be updated while output power is zero"));
+			// IT-DS-0011
 			items.put(TestItemIds.DetectedAtLeastOneDesignatorRemoval              , new TestItem(false, false, new TC[]{TC.TC_Life          }, TestItemType.Inconclusive, "a Designator shall be removed"));
-			// IR-DS-0014
+			// IT-DS-0011, IR-DS-0014
 			items.put(TestItemIds.PowerZeroBeforeRemoval                           , new TestItem(false, true , new TC[]{TC.TC_Life          }, TestItemType.Fail        , "output power shall be zero before removal of Designator"));
 			// IR-DS-0014
 			items.put(TestItemIds.DoNotStayLongInPowerZeroStateWarningOnly         , new TestItem(false, true , new TC[]{TC.TC_Life          }, TestItemType.Warning     , "Designator shall not stay in output power zero state for a long time"));
-			// IR-DS-0014
+			// IR-DS-0013, IR-DS-0014
 			items.put(TestItemIds.RemovedQuicklyAfterPowerZeroWarningOnly          , new TestItem(false, true , new TC[]{TC.TC_Life          }, TestItemType.Warning     , "after setting output power to zero, Designator shall be removed quickly"));
-			// IR-DS-0014
+			// IR-DS-0015
 			items.put(TestItemIds.DesignatorRemovedBeforeHostRemoved               , new TestItem(false, true , new TC[]{TC.TC_Life          }, TestItemType.Fail        , "Designator shall be removed before/when host entity is removed"));
-			// IR-DS-0018
+			// IR-DS-0018, IR-DS-0020, IR-DS-0022
 			items.put(TestItemIds.DrStaticAccelerationNotSetOrZero                 , new TestItem(false, true , new TC[]{            TC.TC_DR}, TestItemType.Fail        , "when DR algorithm is set to static, SpotLinearAccelerationVector shall be set to zero (or not be set at all)"));
-			// IR-DS-0019
+			// IR-DS-0019, IR-DS-0021
 			items.put(TestItemIds.DrNonStaticAccelerationSet                       , new TestItem(false, true , new TC[]{            TC.TC_DR}, TestItemType.Fail        , "when DR algorithm is set to non static, SpotLinearAccelerationVector shall be set"));
 			// Test Suite assumption
 			items.put(TestItemIds.DrAlgoStaticOrFvw                                , new TestItem(false, true , new TC[]{            TC.TC_DR}, TestItemType.Fail        , "DR algorithm shall be Static or FVW"));
