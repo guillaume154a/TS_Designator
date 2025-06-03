@@ -29,6 +29,9 @@ import nl.tno.msg.tc_lib_designator.DesignatorBaseModel.TestItem;
 import nl.tno.msg.tc_lib_designator.DesignatorBaseModel.TestItemIds;
 import nl.tno.msg.tc_lib_designator.DesignatorBaseModel.TestItemType;
 import hla.rti1516e.FederateHandle;
+
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.Map;
 import org.slf4j.Logger;
 
@@ -50,10 +53,16 @@ public class TC_BaseClass extends AbstractTestCase {
 
 	@Override
 	public IVCT_BaseModel getIVCT_BaseModel(final String tcParamJson, final Logger logger) throws TcInconclusive {
-		designatorTcParam              = new DesignatorTcParam(tcParamJson);
-		ivct_rti                       = IVCT_RTI_Factory.getIVCT_RTI(logger);
-		designatorBaseModel            = new DesignatorBaseModel(logger, ivct_rti, designatorTcParam);
-		ivct_LoggingFederateAmbassador = new IVCT_LoggingFederateAmbassador(designatorBaseModel, logger);
+		try {
+			designatorTcParam = new DesignatorTcParam(tcParamJson);
+			ivct_rti = IVCT_RTI_Factory.getIVCT_RTI(logger);
+			designatorBaseModel = new DesignatorBaseModel(logger, ivct_rti, designatorTcParam);
+			ivct_LoggingFederateAmbassador = new IVCT_LoggingFederateAmbassador(designatorBaseModel, logger);
+		} catch (TcInconclusive e) {
+			throw e;
+		} catch (Throwable e) {
+			logInternalAndThrowInconclusive(logger, e);
+		}
 		return designatorBaseModel;
 	}
 
@@ -79,14 +88,31 @@ public class TC_BaseClass extends AbstractTestCase {
 
 	@Override
 	protected void preambleAction(final Logger logger) throws TcInconclusive {
-		// Notify the operator
-		displayOperatorInstructions(logger);
+		try {
+			// Notify the operator
+			displayOperatorInstructions(logger);
 
-		// Initiate rti
-		this.federateHandle = designatorBaseModel.initiateRti(this.federateName, ivct_LoggingFederateAmbassador);
+			// Initiate rti
+			this.federateHandle = designatorBaseModel.initiateRti(this.federateName, ivct_LoggingFederateAmbassador);
 
-		// Do the necessary calls to get handles and do publish and subscribe
-		designatorBaseModel.init(designatorTcParam);
+			// Do the necessary calls to get handles and do publish and subscribe
+			designatorBaseModel.init(designatorTcParam);
+		} catch (TcInconclusive e) {
+			throw e;
+		} catch (Throwable e) {
+			logInternalAndThrowInconclusive(logger, e);
+		}
+	}
+
+	private void logInternalAndThrowInconclusive(final Logger logger, Throwable e) throws TcInconclusive {
+		StringWriter stringWriter = new StringWriter();
+		PrintWriter printWriter = new PrintWriter(stringWriter);
+		printWriter.print("INTERNAL ERROR - ");
+		printWriter.println(e.toString());
+		e.printStackTrace(printWriter);
+		String exceptionDetails = stringWriter.toString();
+		logger.error(exceptionDetails);
+		throw new TcInconclusive(exceptionDetails, e);
 	}
 
 	@Override
